@@ -1,0 +1,14 @@
+.game {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #FFF;
+    border-radius: 5px;
+    margin: 2%;
+    padding: 2%;
+}
+
+.game img {
+    width: 60%;
+}
