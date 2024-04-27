@@ -1,4 +1,4 @@
-import Main from './pages/Main'
+import Main from './pages/Home/Main'
 import './style.css';
 
 function App() {
