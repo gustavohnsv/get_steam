@@ -1,0 +1,59 @@
+.friend-list {
+    display: grid;
+    justify-items: center;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    padding: 2%;
+}
+
+.game-list {
+    display: grid;
+    justify-items: center;
+    grid-template-columns: 1fr 1fr;
+    padding: 2%;
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #222;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.main-header h1 {
+    color: #FFF;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 10px rgba(255, 255, 255, 0.35);
+}
+
+.main-header-left {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.main-header-right {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.main-header-right input {
+    height: 30px;
+    background: transparent;
+    outline: none;
+    color: #FFf;
+    font-size: 1rem;
+    border: none;
+    border-bottom: 1px solid #FFF;
+}
+
+.main-header-right input::placeholder {
+    color: rgba(255, 255, 255, 0.15);
+}

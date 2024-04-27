@@ -1,8 +1,21 @@
 .button button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 30px;
     border: none;
     outline: none;
-    background: #FFF;
+    background: rebeccapurple;
     border-radius: 5px;
     padding: 2%;
     cursor: pointer;
+    color: #FFF;
+    transition: transform 0.2s;
+}
+
+.button button:hover {
+    fill: #EEE;
+    box-shadow: 0 0 10px rebeccapurple;
+    transform: scale(1.3);
 }
