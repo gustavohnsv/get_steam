@@ -12,6 +12,7 @@ import './style.css';
 function Main() {
 
     let [loading, setLoading] = useState(false);
+    const [filter, setFilter] = useState('');
     const [userID, setUserID] = useState('');
     const [gameDetails, setGameDetails] = useState([]);
     const [friendDetails, setFriendDetails] = useState([]);
@@ -73,8 +74,11 @@ function Main() {
                 for (let i = 0; i < items.length; i++) {
                     const item = items[i];
                     const gameData = await gameInfo(item.appid);
-                    gameDetails.push(gameData);
-        
+                    gameDetails.push({
+                        ...gameData,
+                        total_playtime: items[i].playtime_forever,
+                    });
+                    
                     if (i < items.length - 1) {
                         await new Promise(resolve => setTimeout(resolve, 50)); // Aguarda 0.05 segundos
                     }
@@ -106,7 +110,10 @@ function Main() {
                 for (let i = 0; i < items.length; i++) {
                     const item = items[i];
                     const friendData = await userInfo(item.steamid);
-                    friendsDetails.push(friendData);
+                    friendsDetails.push({
+                        ...friendData,
+                        friend_since: items[i].friend_since
+                    });
 
                     if (i < items.length - 1) {
                         await new Promise(resolve => setTimeout(resolve, 50)); // Aguarda 0.05 segundos
@@ -128,7 +135,7 @@ function Main() {
         setUserID('');
     }
 
-    return(
+    return (
         <div className='main'>
             <header className="main-header">
                 <div className="main-header-left">
@@ -139,8 +146,20 @@ function Main() {
                     <input 
                     type="text"
                     value={userID}
-                    onChange={(e) => setUserID(e.target.value)}
+                    onChange={(e) => {
+                        setUserID(e.target.value);
+                        console.log(e.target.value);
+                    }}
                     placeholder="Digite o ID do usuário"
+                    />
+                    <input 
+                    type="text"
+                    value={filter}
+                    onChange={(e) => {
+                        setFilter(e.target.value);
+                        console.log(e.target.value);
+                    }}
+                    placeholder="Digite o filtro"
                     />
                     <Button title='Lista de jogos' action={userAppsList}> <FaGamepad size={20} /> </Button>
                     <Button title='Lista de amigos' action={userFriendList}> <IoPeople size={20} /> </Button>
@@ -152,30 +171,28 @@ function Main() {
                     />
                 </div>
             </header>
+            <section>
             <div className="game-list">
-            {
-                gameDetails.map((game, index) => (
-                    game ? (
+                {
+                    gameDetails.filter(game => game && game.name && game.name.toLowerCase().includes(filter.toLowerCase())).map((game, index) => (
                         <Game
                         key={index}
                         props={game}
-                        />
-                    ) : (
-                        <></>
-                    )
-                ))
-            }
+                        /> 
+                    ))
+                }
             </div>
             <div className="friend-list">
-            {
-                friendDetails.map((friend, index) => (
+                {
+                    friendDetails.filter(friend => friend && friend.name && friend.name.toLowerCase().includes(filter.toLowerCase())).map((friend, index) => (
                         <Friend
                         key={index}
                         props={friend}
-                />
-                ))
-            }
+                        />
+                    ))
+                }
             </div>
+            </section>
         </div>
     )
 }
